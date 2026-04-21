@@ -1,0 +1,4 @@
+REACT_APP_BLH_EAS_API_BASE_URL: https://blh-eas-back-5b5ch2akwq-uc.a.run.app/
+REACT_APP_BLH_EAS_API_PATH_LOGIN: api/login
+REACT_APP_BLH_CURRENCY_API_BASE_URL: https://currency.blhinternal.com
+REACT_APP_DEFAULT_ALLOW_FILES_MIMETYPES: application/pdf,image/*,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.oasis.opendocument.spreadsheet,application/vnd.oasis.opendocument.text

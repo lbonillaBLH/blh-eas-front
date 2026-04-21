@@ -1,0 +1,16 @@
+version: '3'
+services:
+  blh-eas-front:
+    container_name: 'blh-eas-front'
+    ports: 
+      - 3000:3000
+    volumes:
+      - ./:/home/node/
+      - /home/node/node_modules/
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    entrypoint: npm start
+    tty: true
+    env_file:
+      - .env

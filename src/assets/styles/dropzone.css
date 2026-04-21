@@ -1,0 +1,11 @@
+.dzu-dropzone{
+    overflow: hidden;
+}
+
+.dzu-inputLabelWithFiles{
+    /* border: 1px solid ; */
+    color: #3f51b5;
+    justify-content: center;
+    margin: 10px auto;
+    width: 50%;
+}
