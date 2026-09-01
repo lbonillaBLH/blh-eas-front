@@ -10,9 +10,21 @@ docker rm -f $(docker ps -a -q)
 #delete all images
 docker rmi -f $(docker images -aq)
 
+#exportar las REACT_APP_* de deploy-vars.yml como variables de entorno, para que
+#docker-compose las pase como build-args (React las hornea en el bundle en build
+#time; setearlas solo como env vars de Cloud Run --como hacia el paso de abajo--
+#no tiene efecto porque el bundle ya esta compilado para entonces).
+set -a
+while IFS= read -r line; do
+  [ -z "$line" ] && continue
+  key="${line%%:*}"
+  value="${line#*: }"
+  export "$key=$value"
+done < deploy-vars.yml
+set +a
+
 #create image
 docker-compose build --no-cache
-## error en las variables (@todo revisar .env)
 
 #create image tag
 docker tag blh-eas-front_blh-eas-front us-central1-docker.pkg.dev/cdn-storage-228019/prod/blh-eas-front:$1
