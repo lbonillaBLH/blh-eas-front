@@ -1,6 +1,6 @@
 import { useId } from "react";
 import { useQuery } from '@tanstack/react-query';
-import { TextField, Autocomplete, Skeleton, Box, Typography } from "@mui/material";
+import { TextField, Autocomplete, Skeleton, Box, Typography, Alert, AlertTitle } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { fetchCountries, fetchPermissionsCountries } from "../../../utils/request/blhEasRequest";
 
@@ -18,6 +18,7 @@ const CountrySelect = ({ value, onChange, allCountries })=>{
     });
 
     if(countriesResponse.isPending) return <LoadingField/>;
+    if(countriesResponse.error) return <Alert severity="error"><AlertTitle>{t("error")}</AlertTitle>{t("it-is-not-possible-load-data")}</Alert>;
 
     const countries = countriesResponse.data.data.data.filter(c => c.id);
 

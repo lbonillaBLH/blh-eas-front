@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 const ErrorAlert = memo(
     ()=>{
         const { t } = useTranslation();
-        <Alert severity="error">
+        return <Alert severity="error">
         <AlertTitle>{t("error")}</AlertTitle>
             {t("it-is-not-possible-load-data")}
         </Alert>

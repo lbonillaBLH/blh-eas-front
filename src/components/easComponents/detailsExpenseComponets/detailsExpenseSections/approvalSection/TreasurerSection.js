@@ -1,7 +1,7 @@
 import { useState, memo, useId } from "react";
 
 import { useQuery } from "@tanstack/react-query";
-import { Button, Box, TextField, Card, CardHeader, Avatar, Stack, Skeleton, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import { Button, Box, TextField, Card, CardHeader, Avatar, Stack, Skeleton, FormControl, InputLabel, Select, MenuItem, Alert, AlertTitle } from "@mui/material";
 import Grid from '@mui/material/Unstable_Grid2';
 import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
@@ -263,7 +263,10 @@ const CurrencyField = ({ id, countryPaidId, setCurrency, setCountryCurrencies, c
             <Skeleton variant="rectangular" sx={{ width: "100%" }} height={40}/>
         </Stack>;
     }
-    
+    if (error){
+        return <Alert severity="error"><AlertTitle>{t("error")}</AlertTitle>{t("it-is-not-possible-load-data")}</Alert>;
+    }
+
     const countryPaid = data.data.data.find(c => c.id == countryPaidId);
     setCountryCurrencies(countryPaid.currency);
     return <Box>

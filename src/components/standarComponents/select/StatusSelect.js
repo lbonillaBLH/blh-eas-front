@@ -3,7 +3,9 @@ import {
     MenuItem,
     FormControl,
     Select,
-    Skeleton
+    Skeleton,
+    Alert,
+    AlertTitle
 } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import { useTranslation } from "react-i18next";
@@ -19,9 +21,12 @@ const StatusSelect = ({ value, onChange })=>{
         queryKey: ['eas-status'],
         queryFn: ()=> fetchStatus()
     });
-    
+
     if(isPending){
         return <LoadingField/>;
+    }
+    if(error){
+        return <Alert severity="error"><AlertTitle>{t("error")}</AlertTitle>{t("it-is-not-possible-load-data")}</Alert>;
     }
 
     const statusList = data.data.list.filter(s=>s.active && s.id);

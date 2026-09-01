@@ -21,7 +21,7 @@ const blhEasRequest = ({ withToken })=>{
     blhAxiosClient.interceptors.response.use(function(response){
         return response;
     }, function (error){
-        if(error.response.status == 401){
+        if(error.response?.status == 401){
             window.location.href = "/?_="+new Date().getTime();
         };
         return Promise.reject(error);
@@ -45,6 +45,7 @@ const fetchCountries = async ()=>{
         return response;
     }catch(error){
         console.log(error);
+        throw error;
     }
 };
 
@@ -54,6 +55,7 @@ const fetchPermissionsCountries = async ()=>{
         return response;
     }catch(error){
         console.log(error);
+        throw error;
     }
 };
 
@@ -63,6 +65,7 @@ const fetchStatus = async ()=>{
         return response;
     }catch(error){
         console.log(error);
+        throw error;
     }
 };
 

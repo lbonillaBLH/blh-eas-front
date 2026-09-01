@@ -22,6 +22,9 @@ const CountryPaid = ({ countryPaid, setCountryPaid })=>{
     });
 
     if(countriesResponse.isPending) return <LoadingField/>;
+    if(countriesResponse.error){
+        return <Alert severity="error"><AlertTitle>{t("error")}</AlertTitle>{t("it-is-not-possible-load-data")}</Alert>;
+    }
 
     const countries = countriesResponse.data.data.data;
 
