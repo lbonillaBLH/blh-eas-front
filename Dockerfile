@@ -17,7 +17,7 @@ RUN npm install -g serve
 # sobreescribir para desarrollo local.
 ARG REACT_APP_BLH_EAS_API_BASE_URL=https://github-blh-eas-back-qa-228405537736.us-west1.run.app/
 ARG REACT_APP_BLH_EAS_API_PATH_LOGIN=api/login
-ARG REACT_APP_BLH_CURRENCY_API_BASE_URL=https://currency.blhinternal.com
+ARG REACT_APP_BLH_CURRENCY_API_BASE_URL=https://github-blh-currency-228405537736.us-central1.run.app
 ARG REACT_APP_DEFAULT_ALLOW_FILES_MIMETYPES=application/pdf,image/*,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.oasis.opendocument.spreadsheet,application/vnd.oasis.opendocument.text
 
 ENV REACT_APP_BLH_EAS_API_BASE_URL=$REACT_APP_BLH_EAS_API_BASE_URL
