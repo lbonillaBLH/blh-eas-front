@@ -4,7 +4,9 @@ import {
     Avatar,
     Skeleton,
     Stack,
-    Typography
+    Typography,
+    Alert,
+    AlertTitle
 } from '@mui/material';
 import { useQuery } from "@tanstack/react-query";
 import { purple } from '@mui/material/colors';
@@ -46,6 +48,9 @@ const ExchangeMount = ({ countryCurrencies, currency, mount, date, label=null, c
 
     if (!currency) return <></>;
     if(currencyRatesResponse.isPending) return <Loading/>;
+    if(currencyRatesResponse.error){
+        return <Alert severity="error"><AlertTitle>{t("error")}</AlertTitle>{t("it-is-not-possible-load-data")} ({t("currency")})</Alert>;
+    }
     if (!countryCurrencies || !countryCurrencies.lenght == 0) return <></>;
 
     if(label == null) label = t("amount-in-usd");
@@ -92,6 +97,9 @@ const ExchangeSection = ({ countryCurrencies, currency, mount, date })=>{
 
     if(currencyRatesResponse.isPending){
         return <Loading/>;
+    }
+    if(currencyRatesResponse.error){
+        return <Alert severity="error"><AlertTitle>{t("error")}</AlertTitle>{t("it-is-not-possible-load-data")} ({t("currency")})</Alert>;
     }
 
     if (!countryCurrencies || !countryCurrencies.lenght == 0) return <></>;

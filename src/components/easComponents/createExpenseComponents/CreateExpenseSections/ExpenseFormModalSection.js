@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Box, Typography, TextField, Card, CardContent, CardHeader, Avatar, Stack, Skeleton } from '@mui/material';
+import { Box, Typography, TextField, Card, CardContent, CardHeader, Avatar, Stack, Skeleton, Alert, AlertTitle } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import { useTheme } from '@mui/material/styles';
 import {
@@ -155,6 +155,9 @@ const Fields = ({ expense })=>{
 
     if(currencyRatesResponse.isPending){
         return <LoadingFields/>;
+    }
+    if(currencyRatesResponse.error){
+        return <Alert severity="error"><AlertTitle>{t("error")}</AlertTitle>{t("it-is-not-possible-load-data")} ({t("currency")})</Alert>;
     }
 
     const rates = currencyRatesResponse.data.data.rates;
