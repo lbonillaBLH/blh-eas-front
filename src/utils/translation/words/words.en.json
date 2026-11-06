@@ -2,6 +2,7 @@
     "settings": "Settings",
     "create-expense": "Create expense",
     "error": "Error",
+    "expense-not-available": "This expense is no longer available to you: you have no pending actions on it or you do not have access.",
     "it-is-not-possible-load-data": "It is not possible load data",
     "it-is-not-possible-save-data": "It is not possible save data",
     "type": "Type",

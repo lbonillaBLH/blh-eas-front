@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useQuery } from "@tanstack/react-query";
 import Grid from '@mui/material/Unstable_Grid2';
 import { 
@@ -15,7 +17,9 @@ import {
     Tab,
     Tabs,
     Stack,
-    Skeleton
+    Skeleton,
+    Alert,
+    AlertTitle
 } from '@mui/material';
 import {
     CheckCircle as CheckCircleIcon,
@@ -259,14 +263,37 @@ const Loading = ()=>{
 
 const DetailsExpense = ({expenseId})=>{
     const { t } = useTranslation();
+    const navigate = useNavigate();
     const { isPending, error, data } = useQuery({
         queryKey: [`expense-detail`, expenseId],
+        retry: (failureCount, err)=> err?.response?.status !== 404 && failureCount < 3,
         queryFn: ()=> blhEasRequest({ withToken: true })
             .get(`api/eas/detail/${expenseId}`)
             .then(resposne =>{
                 return resposne;
             })
     });
+
+    // El backend responde 404 cuando el usuario no puede ver el gasto (por ejemplo, un
+    // gasto confidencial en el que ya no tiene acciones pendientes tras aprobarlo).
+    const notAvailable = error?.response?.status === 404;
+    useEffect(()=>{
+        if (notAvailable){
+            toast.info(t("expense-not-available"), { toastId: `expense-not-available-${expenseId}` });
+            navigate("/eas", { replace: true });
+        }
+    }, [notAvailable, expenseId, navigate, t]);
+
+    if (notAvailable){
+        return <Loading/>;
+    }
+
+    if (error){
+        return <Alert severity="error">
+            <AlertTitle>{t("error")}</AlertTitle>
+            {t("it-is-not-possible-load-data")}
+        </Alert>;
+    }
 
     if (isPending){
         return <Loading/>;

@@ -2,6 +2,7 @@
     "settings": "Configuraciones",
     "create-expense": "Crear gasto",
     "error": "Error",
+    "expense-not-available": "Este gasto ya no está disponible para ti: no tienes acciones pendientes sobre él o no tienes acceso.",
     "it-is-not-possible-load-data": "No es posible cargar la información",
     "it-is-not-possible-save-data": "It is not possible save data",
     "type": "Tipo",
